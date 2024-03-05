@@ -1,0 +1,38 @@
+---
+title: "Mile Efficiency Planner"
+author: "Shinya Hashimoto"
+date: "`r Sys.Date()`"
+output: ioslides_presentation
+runtime: shiny
+---
+
+## Application Overview
+
+- Purpose: To predict the fuel efficiency (MPG) of cars.
+- Function: Users input the car's horsepower, weight, and the number of cylinders to predict MPG.
+
+## Application Demo
+
+```{r, echo=FALSE}
+# Insert Shiny application's UI components
+sliderInput("horsepower", "Horsepower:", min = 50, max = 300, value = 150)
+sliderInput("weight", "Weight (1000 lbs):", min = 1.5, max = 5.0, value = 3)
+sliderInput("cylinders", "Number of Cylinders:", min = 4, max = 8, value = 4, step = 1)
+
+# Shiny application's server logic
+output$mpgPrediction <- renderText({
+  # Implement logic to calculate MPG
+  mpg <- 30 - (input$cylinders * 2) + (input$horsepower / 100) - (input$weight / 2)
+  paste("Predicted MPG: ", round(mpg, digits = 2))
+})
+
+textOutput("mpgPrediction")
+```
+
+## How to Use
+Move the sliders to select the horsepower, weight, and number of cylinders.
+The MPG will be predicted automatically and displayed below.
+
+## Conclusion
+The "Mile Efficiency Planner" is a powerful tool for predicting the fuel efficiency of cars.
+Feedback and suggestions for improvement are welcome.
